@@ -6,7 +6,7 @@ const lvl = document.getElementById("diff");
 
 let currentPlayer = "X";
 let gameOver = false;
-
+let aiThinking = false;
 
 let board = ["", "", "", "", "", "", "", "", ""];
 
@@ -39,7 +39,7 @@ lvl.addEventListener("change", restartGame);
 
 function handleClick() {
 
-    if (gameOver) return;
+    if (gameOver || aiThinking) return;
 
     if (this.textContent !== "") return;
 
@@ -72,6 +72,7 @@ function handleClick() {
 
 
     statusText.textContent = "AI Thinking...";
+    aiThinking = true;
 
 
     fetch("/move/", {
@@ -90,6 +91,9 @@ function handleClick() {
     .then(response => response.json())
 
     .then(data => {
+        if (gameOver) return;
+
+        aiThinking = false;
 
         const aiMove = data.ai_move;
 
@@ -167,7 +171,7 @@ function restartGame() {
 
 
     gameOver = false;
-
+    aiThinking = false;
 
     currentPlayer = "X";
 
