@@ -18,85 +18,132 @@
             backdrop-filter: blur(10px);
             background: rgba(255,255,255,.08);
             border: 1px solid rgba(255,255,255,.15);
-            transition: .25s;
+            transition:.25s;
         }
 
         .cell:hover{
             transform: scale(1.05);
             background: rgba(255,255,255,.15);
         }
+
+        .stat-card{
+            backdrop-filter: blur(10px);
+            background: rgba(255,255,255,.08);
+            border: 1px solid rgba(255,255,255,.12);
+        }
     </style>
 </head>
 
-<body class="text-white flex justify-center items-center">
+<body class="text-white flex justify-center items-center py-8">
 
-    <div class="w-full max-w-md mx-auto px-5">
+<div class="w-full max-w-md mx-auto px-5">
 
-        <h1 class="text-4xl font-bold text-center mb-2 mt-3">
-            Tic Tac Toe
-        </h1>
+    <h1 class="text-4xl font-bold text-center mb-2">
+        Tic Tac Toe
+    </h1>
 
-        <p class="text-center text-gray-300 mb-8">
-            Challenge the computer
-        </p>
-        <div class="mb-6">
+    <p class="text-center text-gray-300 mb-8">
+        Challenge the computer
+    </p>
 
-    <label class="block text-sm text-gray-300 mb-2 font-medium">
-        Difficulty
-    </label>
 
-    <select
-        id="diff"
-        class="w-full px-4 py-3 rounded-2xl
-               bg-white/10 border border-white/20
-               text-white font-medium
-               outline-none
-               hover:bg-white/15
-               focus:ring-2 focus:ring-indigo-400
-               transition"
-    >
-        <option value="easy" class="bg-slate-800">Easy </option>
-        <option value="medium" selected class="bg-slate-800">Medium </option>
-        <option value="hard" class="bg-slate-800">Hard </option>
-    </select>
+    <!-- difficulty -->
+    <div class="mb-6">
+        <label class="block text-sm text-gray-300 mb-2 font-medium">
+            Difficulty
+        </label>
 
-</div>
-        <div class="bg-white/10 border border-white/10 rounded-3xl shadow-2xl p-6">
+        <select
+            id="diff"
+            class="w-full px-4 py-3 rounded-2xl
+                   bg-white/10 border border-white/20
+                   text-white font-medium
+                   outline-none
+                   hover:bg-white/15
+                   focus:ring-2 focus:ring-indigo-400
+                   transition"
+        >
+            <option value="easy" class="bg-slate-800">Easy</option>
+            <option value="medium" selected class="bg-slate-800">Medium</option>
+            <option value="hard" class="bg-slate-800">Hard</option>
+        </select>
+    </div>
 
-            <div class="text-center mb-6">
-                <p id="status" class="text-lg font-semibold">
-                    Your Turn (X)
-                </p>
-            </div>
 
-            <div class="grid grid-cols-3 gap-4">
-            
-                <button data-index="0" class="cell h-24 rounded-2xl text-4xl font-bold"></button>
-                <button data-index="1" class="cell h-24 rounded-2xl text-4xl font-bold"></button>
-                <button data-index="2" class="cell h-24 rounded-2xl text-4xl font-bold"></button>
+    <!-- main card -->
+    <div class="bg-white/10 border border-white/10 rounded-3xl shadow-2xl p-6">
 
-                <button data-index="3" class="cell h-24 rounded-2xl text-4xl font-bold"></button>
-                <button data-index="4" class="cell h-24 rounded-2xl text-4xl font-bold"></button>
-                <button data-index="5" class="cell h-24 rounded-2xl text-4xl font-bold"></button>
+        <div class="text-center mb-6">
+            <p id="status" class="text-lg font-semibold">
+                Your Turn (X)
+            </p>
+        </div>
 
-                <button data-index="6" class="cell h-24 rounded-2xl text-4xl font-bold"></button>
-                <button data-index="7" class="cell h-24 rounded-2xl text-4xl font-bold"></button>
-                <button data-index="8" class="cell h-24 rounded-2xl text-4xl font-bold"></button>
-            
-            </div>
 
-            <button
-                id="restart-btn"
-                class="w-full mt-6 py-3 rounded-2xl bg-indigo-500 hover:bg-indigo-600 transition font-semibold"
-            >
-                Restart Game
-            </button>
+        <!-- board -->
+        <div class="grid grid-cols-3 gap-4">
+
+            <button data-index="0" class="cell h-24 rounded-2xl text-4xl font-bold"></button>
+            <button data-index="1" class="cell h-24 rounded-2xl text-4xl font-bold"></button>
+            <button data-index="2" class="cell h-24 rounded-2xl text-4xl font-bold"></button>
+
+            <button data-index="3" class="cell h-24 rounded-2xl text-4xl font-bold"></button>
+            <button data-index="4" class="cell h-24 rounded-2xl text-4xl font-bold"></button>
+            <button data-index="5" class="cell h-24 rounded-2xl text-4xl font-bold"></button>
+
+            <button data-index="6" class="cell h-24 rounded-2xl text-4xl font-bold"></button>
+            <button data-index="7" class="cell h-24 rounded-2xl text-4xl font-bold"></button>
+            <button data-index="8" class="cell h-24 rounded-2xl text-4xl font-bold"></button>
 
         </div>
 
+
+        <!-- scoreboard -->
+        <div class="grid grid-cols-3 gap-3 mt-6">
+
+            <div class="stat-card rounded-2xl py-3 text-center">
+                <p class="text-xs text-gray-300 uppercase tracking-wide">
+                    Player
+                </p>
+                <p id="player-score" class="text-2xl font-bold mt-1">
+                    0
+                </p>
+            </div>
+
+            <div class="stat-card rounded-2xl py-3 text-center">
+                <p class="text-xs text-gray-300 uppercase tracking-wide">
+                    AI
+                </p>
+                <p id="ai-score" class="text-2xl font-bold mt-1">
+                    0
+                </p>
+            </div>
+
+            <div class="stat-card rounded-2xl py-3 text-center">
+                <p class="text-xs text-gray-300 uppercase tracking-wide">
+                    Draw
+                </p>
+                <p id="draw-score" class="text-2xl font-bold mt-1">
+                    0
+                </p>
+            </div>
+
+        </div>
+
+
+        <!-- restart -->
+        <button
+            id="restart-btn"
+            class="w-full mt-6 py-3 rounded-2xl bg-indigo-500 hover:bg-indigo-600 transition font-semibold"
+        >
+            Restart Game
+        </button>
+
     </div>
 
-    <script src="{% static 'game/app.js' %}"></script>
+</div>
+
+<script src="{% static 'game/app.js' %}"></script>
 
 </body>
 </html>

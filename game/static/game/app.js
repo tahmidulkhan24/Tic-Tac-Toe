@@ -2,8 +2,13 @@ const cells = document.querySelectorAll(".cell");
 const statusText = document.getElementById("status");
 const restartBtn = document.getElementById("restart-btn");
 const lvl = document.getElementById("diff");
+const player_sc=document.getElementById("player-score");
+const ai_sc=document.getElementById("ai-score");
+const draw=document.getElementById("draw-score");
 
-
+let player=0;
+let ai=0;
+let dr=0;
 let currentPlayer = "X";
 let gameOver = false;
 let aiThinking = false;
@@ -59,16 +64,20 @@ function handleClick() {
 
     if (winner === "X") {
         statusText.textContent = "You Win!";
+        player++;
+        player_sc.textContent=player;
         gameOver = true;
         return;
     }
 
 
     if (!board.includes("")) {
-        statusText.textContent = "Draw!";
-        gameOver = true;
-        return;
-    }
+    statusText.textContent = "Draw!";
+    dr++;
+    draw.textContent = dr;
+    gameOver = true;
+    return;
+}
 
 
     statusText.textContent = "AI Thinking...";
@@ -91,7 +100,9 @@ function handleClick() {
     .then(response => response.json())
 
     .then(data => {
-        if (gameOver) return;
+        setTimeout(()=>
+        {
+            if (gameOver) return;
 
         aiThinking = false;
 
@@ -100,6 +111,8 @@ function handleClick() {
 
         if (aiMove === -1) {
             statusText.textContent = "Draw!";
+            dr++;
+            draw.textContent=dr;
             gameOver = true;
             return;
         }
@@ -117,6 +130,8 @@ function handleClick() {
 
         if (winner === "O") {
             statusText.textContent = "AI Wins!";
+            ai++;
+            ai_sc.textContent=ai;
             gameOver = true;
             return;
         }
@@ -130,6 +145,8 @@ function handleClick() {
 
 
         statusText.textContent = "Your Turn (X)";
+        },500
+        );
     });
 
 }
